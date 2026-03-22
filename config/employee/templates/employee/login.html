@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #FFFFFF;
+            font-family: 'VT323', monospace;
+            font-size: 24px;
+            padding: 50px;
+            line-height: 1.1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            margin: 0;
+        }
+        .header { border-bottom: 2px solid #FFFFFF; margin-bottom: 20px; padding-bottom: 10px; }
+        .label { font-weight: bold; text-transform: uppercase; }
+        .auth-box { border: 2px solid #FFFFFF; padding: 40px; width: 450px; text-align: left; }
+        
+        /* Стилізація полів вводу */
+        .terminal-input {
+            background: #000;
+            border: 1px solid #FFFFFF;
+            color: #FFFFFF;
+            padding: 10px;
+            margin: 15px 0;
+            width: 90%;
+            font-family: 'VT323', monospace;
+            font-size: 26px;
+            outline: none;
+            text-transform: uppercase;
+        }
+        .terminal-input::placeholder { color: #555; }
+        .terminal-input:focus { border: 2px solid #FFFFFF; background: #111; }
+
+        /* Кнопка виконання */
+        .btn-execute {
+            background-color: #000;
+            color: #FFFFFF;
+            text-decoration: none;
+            border: 1px solid #FFFFFF;
+            padding: 10px 20px;
+            font-family: 'VT323', monospace;
+            font-size: 24px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn-execute:hover { background-color: #FFFFFF; color: #000; }
+
+        .error-msg {
+            color: #FFFFFF;
+            background-color: #000;
+            border: 1px dashed #FFFFFF;
+            padding: 10px;
+            margin-top: 25px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink { 50% { border-color: transparent; } }
+    </style>
+</head>
+<body>
+    <div class="auth-box">
+        <div class="header">
+            <h1>R.O.C.S._GATEWAY_AUTH</h1>
+        </div>
+
+        <p><span class="label">Status:</span> RESTRICTED_ACCESS</p>
+        <p><span class="label">Protocol:</span> IDENTIFICATION_REQUIRED</p>
+        
+        <hr color="#FFFFFF" style="margin: 20px 0;">
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <label class="label">> ENTER_EMPLOYEE_ID:</label><br>
+            {{ form.employee_id }}
+            
+            <br><br>
+            
+            <label class="label">> ENTER_ACCESS_KEY:</label><br>
+            {{ form.access_key }}
+            
+            <br>
+            <button type="submit" class="btn-execute">> EXECUTE_LOGIN_SEQUENCE</button>
+        </form>
+
+        {% if error_message %}
+            <div class="error-msg">
+                <span class="label">System_Error:</span> {{ error_message }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

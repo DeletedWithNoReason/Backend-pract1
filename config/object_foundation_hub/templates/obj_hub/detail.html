@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #FFFFFF; /* Чистий білий текст */
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            padding: 50px;
+            line-height: 1.1;
+        }
+        .header { border-bottom: 2px solid #FFFFFF; margin-bottom: 20px; padding-bottom: 10px; }
+        .label { font-weight: bold; text-transform: uppercase; }
+        .content-box { border: 1px solid #FFFFFF; padding: 20px; margin-top: 20px; }
+        .nav-link { color: #FFFFFF; text-decoration: none; border: 1px solid #FFFFFF; padding: 5px 10px; }
+        .nav-link:hover { background-color: #FFFFFF; color: #000; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SYSTEM_ACCESS: {{ generation.foundation_year }}</h1>
+    </div>
+
+    <div class="content-box">
+        <p><span class="label">Functional Designation:</span> Remote Operational Control System</p>
+        <p><span class="label">Status:</span> {{ generation.system_status }}</p>
+        <hr color="#FFFFFF">
+        <p>{{ generation.summary|linebreaks }}</p>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <a href="#" class="nav-link">> ACCESS_CONNECTED_OBJECTS</a> 
+        <br><br>
+        <a href="{% url 'hubs_list' %}" class="nav-link"><< RETURN_TO_MAIN_HUB</a>
+    </div>
+</body>
+</html>
